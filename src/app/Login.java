@@ -158,6 +158,10 @@ public class Login extends javax.swing.JFrame {
                         (password.equals(bdU.obtenerUsuario(i).getPassword())) ) {
                     
                     /*Enviamos al usuario a la ventana menu*/
+                    dispose();
+                    new Menu().setVisible(true);
+                    
+                    /*Verificamos que todo va bien*/
                     System.out.println("Todo correcto, bienvenido a la ventana del Menu "
                             + bdU.obtenerUsuario(i).getNOMBRE());
                     
