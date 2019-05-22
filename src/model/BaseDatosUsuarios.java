@@ -20,7 +20,7 @@ package model;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase que simula una base de datos
  * @author santi
  */
 public class BaseDatosUsuarios {
@@ -29,7 +29,7 @@ public class BaseDatosUsuarios {
     private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     
     /**
-     *Agregar usuario
+     * Agregar usuario
      * @param nombre nombre del usuario
      * @param username nombre de la cuenta del usuario
      * @param password contraseña de la cuenta del usuario
@@ -44,14 +44,21 @@ public class BaseDatosUsuarios {
     }
     
     /**
-     *Obtencion del usuario
+     * Obtencion del usuario
      * @param indice Indica el indice donde se encuentra el usuario en el arraylist
      * @return Retorna el usuario
      */
     public Usuario obtenerUsuario(int indice) {
         return usuarios.get(indice);
     }
-
     
+    /**
+     * Este metodo sirve para saber la catidad total de usuarios en la Base de 
+     * datos
+     * @return retorna la longitud del arraylist usuarios
+     */
+    public int usuariosTotales() {
+        return usuarios.size();
+    }
     
 }

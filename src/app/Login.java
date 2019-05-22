@@ -1,21 +1,51 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2019 santi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package app;
+
+/*Importamos las clases que utilizaremos*/
+import javax.swing.JOptionPane;
+import model.BaseDatosUsuarios;
 
 /**
  *
  * @author santi
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    /*Creamos nuestra base de datos de usuarios*/
+    static BaseDatosUsuarios bdU = new BaseDatosUsuarios();
+        
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        
+        /*Al crear la ventana...*/
+
+        //Indicamos el titulo de la ventana
+        this.setTitle("SDPL: Login");
+        //Indicamos que la ventana se cree al centro de la pantalla
+        this.setLocationRelativeTo(null);
+        //Indicamos que nuestra ventana no se puede cambiar de tamaño
+        this.setResizable(false);
+        
+        //Creamos un nuevo usuario administrador
+        bdU.agregarUsuario("Santiago", "ElCazy", "12345");
     }
 
     /**
@@ -45,6 +75,11 @@ public class Login extends javax.swing.JFrame {
         lblContra.setText("Contraseña: ");
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -100,6 +135,58 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*Si el boton Ingresar es presionado*/
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        
+        /*obtenemos los datos ingresados por el usuario*/
+        String username = txtUsuario.getText().trim();
+        String password = pswContra.getText().trim();
+        //El metodo trim sirve para eliminar los espacios en el String
+        
+        /*Comprobamos*/
+        //Si el usuario escribio algo...
+        if ( (!username.equals("")) || (!password.equalsIgnoreCase("")) ) {
+            
+            /*Recorremos todos los usuarios*/
+            for (int i = 0; i < bdU.usuariosTotales(); i++) {
+                
+                /*Comprobamos en cada ciclo*/
+                
+                /*Si el username coincide con el username de la BD Y el password
+                coincide con el password de laBD...*/
+                if ( (username.equals(bdU.obtenerUsuario(i).getUsername())) &&
+                        (password.equals(bdU.obtenerUsuario(i).getPassword())) ) {
+                    
+                    /*Enviamos al usuario a la ventana menu*/
+                    System.out.println("Todo correcto, bienvenido a la ventana del Menu "
+                            + bdU.obtenerUsuario(i).getNOMBRE());
+                    
+                }
+                /*Si username o password no coinciden con la BD...*/
+                else {
+                    
+                    //Indicamos al usuario que los datos estan incorrectos
+                    JOptionPane.showMessageDialog(null, "Datos incorrectos, ingrese nuevamente");
+                    
+                    /*Borramos los campos para que vuelva a digitar el usuario*/
+                    txtUsuario.setText("");
+                    pswContra.setText("");
+                    //Indicamos al programa que no enfoque el btn
+                    btnIngresar.setFocusPainted(false);
+                    
+                }
+            }
+        }
+        //Si el usuario no escribio nada...
+        else {
+            
+            //Le indicamos que llene los campos
+            JOptionPane.showMessageDialog(null, "Porfavor rellene los campos");
+            
+        }
+        
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -111,7 +198,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
