@@ -64,7 +64,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        lblTitulo.setText("Titulo");
+        lblTitulo.setText("Hola");
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(lblTitulo)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
